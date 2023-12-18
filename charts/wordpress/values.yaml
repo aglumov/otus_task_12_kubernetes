@@ -1,0 +1,4 @@
+replicas: 1
+wordpress:
+  image: wordpress
+  imageTag: php8.2

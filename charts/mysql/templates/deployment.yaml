@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: {{ .Values.mysql.image }}:{{ .Values.mysql.imageTag }}
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: {{ .Values.db.root.password }}
+        - name: MYSQL_PASSWORD
+          value: {{ .Values.db.user.password }}
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_USER
+          value: {{ .Values.db.user.username }}
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-db-files
+          mountPath: /var/lib/mysql
+
+      volumes:
+      - name: mysql-db-files
+        persistentVolumeClaim:
+          claimName: pvc-hdd
