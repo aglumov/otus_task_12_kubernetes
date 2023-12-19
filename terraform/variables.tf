@@ -1,5 +1,6 @@
 variable "yc_token" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "yc_cloud_id" {
@@ -21,13 +22,16 @@ variable "yc_subnets" {
 }
 
 variable "db_root_password" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "db_user_username" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "db_user_password" {
-  type = string
+  type      = string
+  sensitive = true
 }

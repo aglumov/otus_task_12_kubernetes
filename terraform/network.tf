@@ -25,10 +25,3 @@ resource "yandex_vpc_route_table" "this" {
     gateway_id         = yandex_vpc_gateway.this.id
   }
 }
-
-resource "yandex_vpc_address" "addr" {
-  name = "wordpress"
-  external_ipv4_address {
-    zone_id = "ru-central1-a"
-  }
-}

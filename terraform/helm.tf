@@ -1,4 +1,3 @@
-
 resource "helm_release" "nginx_ingress" {
   name = "ingress-nginx"
 
@@ -57,6 +56,7 @@ resource "helm_release" "wordpress" {
 
   depends_on = [
     yandex_kubernetes_node_group.node_group,
-    helm_release.mysql
+    helm_release.mysql,
+    helm_release.nginx_ingress
   ]
 }
